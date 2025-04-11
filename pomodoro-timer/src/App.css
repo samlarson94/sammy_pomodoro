@@ -1,11 +1,27 @@
 /* Global styles and box sizing */
+@font-face {
+  font-family: 'sterion-b';
+  src: url('../public/fonts/sterion-b.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'rollobox';
+  src: url('../public/fonts/rollobox-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Audiowide', Tahoma, Geneva, Verdana, sans-serif;
   background: #0a0a0a;
   display: flex;
   justify-content: center;
@@ -19,12 +35,38 @@ body {
   background: #1a1a1a;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
   text-align: center;
   max-width: 400px;
   width: 100%;
   transition: all 0.5s ease;
   border: 2px solid #333;
+  position: relative;
+}
+
+.app-container::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 12px;
+  background: linear-gradient(45deg, #ff00ff, #00ff00, #ff00ff);
+  z-index: -1;
+  animation: glow 2s linear infinite;
+}
+
+@keyframes glow {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }
 
 /* Inactive state */
@@ -56,6 +98,7 @@ body {
   color: #000;
   border: none;
   box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+  font-family: Audiowide;
 }
 
 .app-container.work-mode .controls button:hover {
@@ -89,15 +132,17 @@ body {
 
 /* App title styling */
 h1 {
-  margin-bottom: 1rem;
-  font-size: 2rem;
+  margin-bottom: 1.25rem;
+  font-size: 2.5rem;
+  font-family: 'sterion-b', 'Courier New', monospace;
   color: #fff;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  letter-spacing: 2px;
 }
 
 /* Mode toggle switch */
 .mode-toggle {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   display: flex;
   justify-content: center;
 }
@@ -112,6 +157,8 @@ h1 {
   font-size: 1rem;
   transition: all 0.3s ease;
   min-width: 150px;
+  font-family: 'Audiowide';
+
 }
 
 .mode-button:hover {
@@ -138,6 +185,8 @@ h1 {
   display: flex;
   justify-content: space-around;
   margin-bottom: 1rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
 }
 
 .input-group {
@@ -163,7 +212,7 @@ h1 {
 .timer-display {
   font-size: 4rem;
   margin-bottom: 1rem;
-  font-family: 'Courier New', monospace;
+  font-family: 'Audiowide', momospace;
   font-weight: bold;
 }
 
@@ -172,7 +221,7 @@ h1 {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .controls button {
@@ -184,6 +233,7 @@ h1 {
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.3s ease;
+  font-family: 'Audiowide'
 }
 
 .controls button:hover {
@@ -198,7 +248,7 @@ h1 {
 
 /* Footer styling */
 footer {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   font-size: 0.9rem;
   color: #666;
 }

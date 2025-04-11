@@ -140,40 +140,46 @@ function App() {
           className="mode-button"
           onClick={() => setCustomMode(!customMode)}
         >
-          {customMode ? 'Preset Session' : 'Custom Timer'}
+          {customMode ? 'Preset' : 'Custom Timer'}
         </button>
       </div>
 
-      {customMode && (
-        <div className="custom-settings">
-          <div className="input-group">
-            <label>Hours:</label>
-            <input 
-              type="number" 
-              name="hours" 
-              min="0" 
-              max="10"
-              value={customTime.hours} 
-              onChange={handleCustomTimeChange} 
-            />
+      {customMode ? (
+        <>
+          <div className="timer-display">
+            <span>{formatTime(timeLeft)}</span>
           </div>
-          <div className="input-group">
-            <label>Minutes:</label>
-            <input 
-              type="number" 
-              name="minutes" 
-              min="0" 
-              max="59"
-              value={customTime.minutes} 
-              onChange={handleCustomTimeChange} 
-            />
+          
+          <div className="custom-settings">
+            <div className="input-group">
+              <label>Hours:</label>
+              <input 
+                type="number" 
+                name="hours" 
+                min="0" 
+                max="10"
+                value={customTime.hours} 
+                onChange={handleCustomTimeChange} 
+              />
+            </div>
+            <div className="input-group">
+              <label>Minutes:</label>
+              <input 
+                type="number" 
+                name="minutes" 
+                min="0" 
+                max="59"
+                value={customTime.minutes} 
+                onChange={handleCustomTimeChange} 
+              />
+            </div>
           </div>
+        </>
+      ) : (
+        <div className="timer-display">
+          <span>{formatTime(timeLeft)}</span>
         </div>
       )}
-
-      <div className="timer-display">
-        <span>{formatTime(timeLeft)}</span>
-      </div>
       
       <div className="controls">
         <button onClick={startTimer}>Start</button>
@@ -195,7 +201,8 @@ function App() {
       )}
 
       <footer>
-        <p>Built with ReactJS</p>
+        <p>Time to Lock in</p>
+        <p style={{marginTop: '-.5rem'}}>⚡</p>
       </footer>
     </div>
   );
