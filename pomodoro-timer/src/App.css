@@ -35,7 +35,7 @@ body {
   background: #1a1a1a;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(233, 46, 251, 0.5);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
   text-align: center;
   max-width: 400px;
   width: 100%;
@@ -52,17 +52,19 @@ body {
   right: -5px;
   bottom: -5px;
   border-radius: 12px;
-  background: linear-gradient(45deg, #E92EFB, #FF2079, #440BD4, #04005E);
+  background: linear-gradient(45deg, #ffffff, #f0f0f0, #ffffff, #f0f0f0);
   z-index: -1;
   animation: glow 2s linear infinite;
 }
 
 .app-container.work-mode::before {
-  background: linear-gradient(45deg, #00ff00, #00cc00, #009900, #006600);
+  background: #00ff00;
+  animation: none;
 }
 
 .app-container.break-mode::before {
-  background: linear-gradient(45deg, #ff00ff, #cc00cc, #990099, #660066);
+  background: #ff00ff;
+  animation: none;
 }
 
 @keyframes glow {
