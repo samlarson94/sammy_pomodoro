@@ -34,6 +34,7 @@ body {
   min-height: 100vh;
   transition: background-color 0.5s ease;
   padding: 1rem;
+  width: 100%;
 }
 
 /* Container for the app with a polished card style */
@@ -44,10 +45,11 @@ body {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
   text-align: center;
   max-width: 400px;
-  width: 100%;
+  width: calc(100% - 6rem);
   transition: all 0.5s ease;
   border: 2px solid #333;
   position: relative;
+  margin: 0 auto;
 }
 
 .app-container::before {
@@ -292,7 +294,8 @@ footer {
 
   .app-container {
     padding: 1rem;
-    margin: 0 3rem;
+    width: calc(100% - 6rem);
+    margin: 0 auto;
   }
 
   h1 {
@@ -333,7 +336,8 @@ footer {
   }
 
   .app-container {
-    margin: 0 1.5rem;
+    width: calc(100% - 6rem);
+    margin: 0 auto;
   }
 
   .timer-display {
