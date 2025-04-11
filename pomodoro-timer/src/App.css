@@ -286,8 +286,13 @@ footer {
     font-size: 14px;
   }
 
+  body {
+    padding: 1.5rem;
+  }
+
   .app-container {
     padding: 1rem;
+    margin: 0 1.5rem;
   }
 
   h1 {
@@ -321,6 +326,14 @@ footer {
 @media (max-width: 320px) {
   html {
     font-size: 12px;
+  }
+
+  body {
+    padding: 1.5rem;
+  }
+
+  .app-container {
+    margin: 0 1.5rem;
   }
 
   .timer-display {
