@@ -1,18 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "pomodoro-timer/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "pomodoro-timer/build"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/pomodoro-timer/$1"
-    }
+  "buildCommand": "npm run build",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
-} 
+}
