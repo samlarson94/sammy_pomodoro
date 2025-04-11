@@ -200,7 +200,7 @@ function App() {
         </div>
       )}
 
-      <footer className="footer-text" style={{marginTop: '-1rem'}}>
+      <footer className="footer-text" style={{marginTop: '-.5rem'}}>
         {!isRunning ? (
            <div style={{display: 'flex', flexDirection: 'column'}}>
             <p>Time to Lock In</p>
