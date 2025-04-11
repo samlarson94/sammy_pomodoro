@@ -45,7 +45,7 @@ body {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
   text-align: center;
   max-width: 400px;
-  width: calc(100% - 6rem);
+  width: calc(100% - 3rem);
   transition: all 0.5s ease;
   border: 2px solid #333;
   position: relative;
