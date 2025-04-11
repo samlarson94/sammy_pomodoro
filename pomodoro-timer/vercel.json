@@ -1,6 +1,18 @@
 {
   "version": 2,
-  "framework": "create-react-app",
-  "buildCommand": "npm run build",
-  "installCommand": "npm install"
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
 } 
