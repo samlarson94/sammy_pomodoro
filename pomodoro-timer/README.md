@@ -1,3 +1,43 @@
+# Pomodoro Timer
+
+A retro-styled Pomodoro timer application built with React.
+
+## Features
+
+- Customizable timer settings
+- Work and break modes with distinct visual themes
+- Retro neon styling
+- Sound notifications
+- Responsive design
+
+## Local Development
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+
+## Deployment
+
+This project is configured for deployment on Vercel:
+
+1. Push your code to a GitHub repository
+2. Go to [Vercel](https://vercel.com)
+3. Import your repository
+4. Vercel will automatically detect the React configuration and deploy your app
+
+## Technologies Used
+
+- React
+- CSS3
+- HTML5
+- JavaScript (ES6+)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
