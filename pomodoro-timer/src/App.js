@@ -200,9 +200,23 @@ function App() {
         </div>
       )}
 
-      <footer>
-        <p>Time to Lock in</p>
-        <p style={{marginTop: '-.5rem'}}>⚡</p>
+      <footer className="footer-text">
+        {!isRunning ? (
+           <div style={{display: 'flex', flexDirection: 'column'}}>
+            <p>Time to Lock In</p>
+            <p style={{marginTop: '-.5rem'}}>⚡</p>
+         </div>
+        ) : sessionType === 'focus' ? (
+          <div style={{display: 'flex', flexDirection: 'column'}}>
+            <p>Heads Down</p>
+            <p style={{marginTop: '-.5rem'}}>🔨</p>
+          </div>
+        ) : (
+          <div style={{display: 'flex', flexDirection: 'column'}}>
+            <p>Chill Time</p>
+            <p style={{marginTop: '-.5rem'}}>🌴</p>
+          </div>
+        )}
       </footer>
     </div>
   );
