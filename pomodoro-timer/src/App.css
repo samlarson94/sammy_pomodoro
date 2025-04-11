@@ -44,7 +44,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
   text-align: center;
-  max-width: 400px;
+  max-width: 500px;
   width: calc(100% - 3rem);
   transition: all 0.5s ease;
   border: 2px solid #333;
