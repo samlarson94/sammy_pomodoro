@@ -14,10 +14,65 @@ function App() {
   
   const timerRef = useRef(null);
   const audioRef = useRef(new Audio('/sounds/ding.mp3'));
+  const tickCountRef = useRef(0);
+  const tickTimerRef = useRef(null);
+  const audioContextRef = useRef(null);
+  const oscillatorRef = useRef(null);
+  const gainNodeRef = useRef(null);
+
+  // Initialize audio context
+  useEffect(() => {
+    audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+    gainNodeRef.current = audioContextRef.current.createGain();
+    gainNodeRef.current.gain.value = 0.1; // Set volume to 10%
+    gainNodeRef.current.connect(audioContextRef.current.destination);
+  }, []);
+
+  // Play tick sound
+  const playTick = () => {
+    if (audioContextRef.current) {
+      oscillatorRef.current = audioContextRef.current.createOscillator();
+      oscillatorRef.current.type = 'sine';
+      oscillatorRef.current.frequency.setValueAtTime(800, audioContextRef.current.currentTime);
+      oscillatorRef.current.connect(gainNodeRef.current);
+      oscillatorRef.current.start();
+      oscillatorRef.current.stop(audioContextRef.current.currentTime + 0.1); // Very short tick
+    }
+  };
+
+  // Update document title with timer
+  useEffect(() => {
+    if (isRunning) {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      const sessionName = customMode ? 'Custom Timer' : 
+                         sessionType === 'focus' ? 'Focus' :
+                         sessionType === 'shortBreak' ? 'Short Break' : 'Long Break';
+      document.title = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} - ${sessionName}`;
+    } else {
+      document.title = 'Pomodoro Timer';
+    }
+  }, [timeLeft, isRunning, sessionType, customMode]);
 
   // Timer effect – runs when isRunning changes
   useEffect(() => {
     if (isRunning) {
+      // Play ticking sound for first 3 seconds
+      if (tickCountRef.current < 3) {
+        playTick();
+        tickCountRef.current++;
+        
+        // Set up tick timer
+        tickTimerRef.current = setInterval(() => {
+          if (tickCountRef.current < 3) {
+            playTick();
+            tickCountRef.current++;
+          } else {
+            clearInterval(tickTimerRef.current);
+          }
+        }, 1000);
+      }
+
       timerRef.current = setInterval(() => {
         setTimeLeft(prevTime => {
           if (prevTime <= 1) {
@@ -28,8 +83,16 @@ function App() {
           return prevTime - 1;
         });
       }, 1000);
+    } else {
+      // Clear all timers when timer stops
+      clearInterval(timerRef.current);
+      clearInterval(tickTimerRef.current);
+      tickCountRef.current = 0;
     }
-    return () => clearInterval(timerRef.current);
+    return () => {
+      clearInterval(timerRef.current);
+      clearInterval(tickTimerRef.current);
+    };
   }, [isRunning]);
 
   // Play sound effect
@@ -72,6 +135,7 @@ function App() {
   const startTimer = () => {
     if (!isRunning) {
       setIsRunning(true);
+      tickCountRef.current = 0; // Reset tick count when starting
     }
   };
 
@@ -79,6 +143,8 @@ function App() {
   const stopTimer = () => {
     setIsRunning(false);
     clearInterval(timerRef.current);
+    clearInterval(tickTimerRef.current);
+    tickCountRef.current = 0;
   };
 
   // Restart the timer (resets the current session)
