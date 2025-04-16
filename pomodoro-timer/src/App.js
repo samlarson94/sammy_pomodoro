@@ -135,7 +135,7 @@ function App() {
   const startTimer = () => {
     if (!isRunning) {
       setIsRunning(true);
-      tickCountRef.current = 0; // Reset tick count when starting
+      tickCountRef.current = 0; 
     }
   };
 

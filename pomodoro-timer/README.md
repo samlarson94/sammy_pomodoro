@@ -24,9 +24,9 @@ A retro-styled Pomodoro timer application built with React.
 
 ## Deployment
 
-This project is configured for deployment on Vercel:
+This project is configured for deployment on Vercel.
 
-1. Push your code to a GitHub repository
+1. Push code to a GitHub repository
 2. Go to [Vercel](https://vercel.com)
 3. Import your repository
 4. Vercel will automatically detect the React configuration and deploy your app
