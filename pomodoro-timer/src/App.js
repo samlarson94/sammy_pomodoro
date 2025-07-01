@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
+import SpaceBackground from './SpaceBackground';
 
 function App() {
   // Timer states
@@ -198,93 +199,96 @@ function App() {
   }, [customMode, customTime]);
 
   return (
-    <div className={`app-container ${!isRunning ? 'inactive' : ''} ${isRunning && sessionType === 'focus' ? 'work-mode' : ''} ${isRunning && (sessionType === 'shortBreak' || sessionType === 'longBreak') ? 'break-mode' : ''}`}>
-      <h1>Pomodoro Timer</h1>
-      
-      <div className="mode-toggle">
-        <button 
-          className="mode-button"
-          onClick={() => setCustomMode(!customMode)}
-        >
-          {customMode ? 'Preset' : 'Custom Timer'}
-        </button>
-      </div>
+    <>
+      <SpaceBackground />
+      <div className={`app-container ${!isRunning ? 'inactive' : ''} ${isRunning && sessionType === 'focus' ? 'work-mode' : ''} ${isRunning && (sessionType === 'shortBreak' || sessionType === 'longBreak') ? 'break-mode' : ''}`}>
+        <h1>Pomodoro Timer</h1>
+        
+        <div className="mode-toggle">
+          <button 
+            className="mode-button"
+            onClick={() => setCustomMode(!customMode)}
+          >
+            {customMode ? 'Preset' : 'Custom Timer'}
+          </button>
+        </div>
 
-      {customMode ? (
-        <>
+        {customMode ? (
+          <>
+            <div className="timer-display">
+              <span>{formatTime(timeLeft)}</span>
+            </div>
+            
+            <div className="custom-settings">
+              <div className="input-group">
+                <label>Hours:</label>
+                <input 
+                  type="number" 
+                  name="hours" 
+                  min="0" 
+                  max="10"
+                  value={customTime.hours} 
+                  onChange={handleCustomTimeChange} 
+                />
+              </div>
+              <div className="input-group">
+                <label>Minutes:</label>
+                <input 
+                  type="number" 
+                  name="minutes" 
+                  min="0" 
+                  max="59"
+                  value={customTime.minutes} 
+                  onChange={handleCustomTimeChange} 
+                />
+              </div>
+            </div>
+          </>
+        ) : (
           <div className="timer-display">
             <span>{formatTime(timeLeft)}</span>
           </div>
-          
-          <div className="custom-settings">
-            <div className="input-group">
-              <label>Hours:</label>
-              <input 
-                type="number" 
-                name="hours" 
-                min="0" 
-                max="10"
-                value={customTime.hours} 
-                onChange={handleCustomTimeChange} 
-              />
-            </div>
-            <div className="input-group">
-              <label>Minutes:</label>
-              <input 
-                type="number" 
-                name="minutes" 
-                min="0" 
-                max="59"
-                value={customTime.minutes} 
-                onChange={handleCustomTimeChange} 
-              />
-            </div>
-          </div>
-        </>
-      ) : (
-        <div className="timer-display">
-          <span>{formatTime(timeLeft)}</span>
+        )}
+        
+        <div className="controls">
+          <button onClick={startTimer}>Start</button>
+          <button onClick={stopTimer}>Stop</button>
+          <button onClick={restartTimer}>Restart</button>
         </div>
-      )}
-      
-      <div className="controls">
-        <button onClick={startTimer}>Start</button>
-        <button onClick={stopTimer}>Stop</button>
-        <button onClick={restartTimer}>Restart</button>
-      </div>
 
-      {!customMode && (
-        <div className="session-info">
-          <p>
-            Session: {sessionType === 'focus'
-              ? "Focus Session"
-              : sessionType === 'shortBreak'
-              ? "Short Break"
-              : "Long Break"}
-          </p>
-          <p>Cycle: {sessionType !== 'longBreak' ? cycleCount + 1 : "Completed"}</p>
-        </div>
-      )}
-
-      <footer className="footer-text" style={{marginTop: '-.5rem'}}>
-        {!isRunning ? (
-           <div style={{display: 'flex', flexDirection: 'column'}}>
-            <p>Time to Lock In</p>
-            <p style={{marginTop: '-.5rem'}}>⚡</p>
-         </div>
-        ) : sessionType === 'focus' ? (
-          <div style={{display: 'flex', flexDirection: 'column'}}>
-            <p>Heads Down</p>
-            <p style={{marginTop: '-.5rem'}}>🔨</p>
-          </div>
-        ) : (
-          <div style={{display: 'flex', flexDirection: 'column'}}>
-            <p>Chill Time</p>
-            <p style={{marginTop: '-.5rem'}}>🌴</p>
+        {!customMode && (
+          <div className="session-info">
+            <p>
+              Session: {sessionType === 'focus'
+                ? "Focus Session"
+                : sessionType === 'shortBreak'
+                ? "Short Break"
+                : "Long Break"}
+            </p>
+            <p>Cycle: {sessionType !== 'longBreak' ? cycleCount + 1 : "Completed"}</p>
           </div>
         )}
-      </footer>
-    </div>
+
+        <footer className="footer-text" style={{marginTop: '-.5rem'}}>
+          {!isRunning ? (
+             <div style={{display: 'flex', flexDirection: 'column'}}>
+              <p>Time to Lock In</p>
+              <p style={{marginTop: '-.5rem'}}>⚡</p>
+           </div>
+          ) : sessionType === 'focus' ? (
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+              <p>Heads Down</p>
+              <p style={{marginTop: '-.5rem'}}>🔨</p>
+            </div>
+          ) : (
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+              <p>Chill Time</p>
+              <p style={{marginTop: '-.5rem'}}>🌴</p>
+            </div>
+          )}
+        </footer>
+      </div>
+    </>
   );
 }
 
